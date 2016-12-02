@@ -1,0 +1,553 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+body {
+  padding-top: 60px;
+  /* SCREEN 2 */
+  /* SCREEN 3 */
+  /* #page3 {
+		.search input {
+			&:before {
+				content: "\f002";
+				font-family: FontAwesome;
+				position: absolute;
+				left: 0;
+			}
+		}
+	} */
+  /* SCREEN 4 */
+  /* SCREEN 4 */
+  /* SCREEN 11 */
+  /* SCREEN 12 */
+  /* MODALS */
+}
+body hr {
+  margin: 10px 0;
+}
+body .page {
+  display: none;
+}
+body .page-heading {
+  font-weight: 600;
+  margin-left: 10px;
+}
+body .panel {
+  padding: 0;
+  /* to use, add class tableSection to table element */
+}
+body .panel .panel-title {
+  display: inline;
+  margin-right: 20px;
+}
+body .panel .search {
+  max-width: 200px;
+  display: inline;
+}
+body .panel .sort {
+  margin-top: -2px;
+}
+body .panel .pagination {
+  display: none;
+  /* remove, in case of use */
+  padding-left: 10px;
+}
+body .panel .table {
+  height: 100px;
+}
+body .panel .table tbody {
+  cursor: pointer;
+}
+body .panel .table tbody tr:not(.success):not(.danger):not(.warning):not(.no-blue-hover tr):hover {
+  background-color: #337ab7;
+  color: #FFF;
+}
+body .panel .table-overflow {
+  overflow: auto;
+  max-height: 533px;
+}
+body .panel table.tableSection {
+  display: table;
+  width: 100%;
+}
+body .panel table.tableSection thead,
+body .panel table.tableSection tbody {
+  float: left;
+  width: 100%;
+}
+body .panel table.tableSection tbody {
+  overflow: auto;
+  height: 300px;
+}
+body .panel table.tableSection tr {
+  width: 100%;
+  display: table;
+  text-align: left;
+}
+body .panel table.tableSection th,
+body .panel table.tableSection td {
+  width: 33%;
+}
+body .tile-sm {
+  width: 70px;
+  height: 70px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #eeeeee;
+  float: left;
+  border: 4px solid transparent;
+  cursor: pointer;
+  color: #337ab7;
+  position: relative;
+  font-weight: 600;
+}
+body .tile-sm span {
+  display: block;
+  height: 50%;
+  line-height: 110px;
+  text-align: center;
+}
+body .tile-sm p {
+  position: absolute;
+  bottom: 10px;
+  margin: 0;
+}
+body .tile-sm:hover {
+  border: 4px solid #337ab7;
+}
+body .tile-sm span.fa-second {
+  position: absolute;
+  top: -8px;
+  left: 40px;
+  width: 20px;
+}
+body .tile-sm span.fa-second i {
+  font-size: 1.5em;
+}
+body .tile-md {
+  width: 150px;
+  height: 150px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #eeeeee;
+  float: left;
+  border: 4px solid transparent;
+  cursor: pointer;
+  color: #337ab7;
+  position: relative;
+  font-weight: 600;
+}
+body .tile-md span {
+  display: block;
+  height: 50%;
+  line-height: 110px;
+  text-align: center;
+}
+body .tile-md p {
+  position: absolute;
+  bottom: 10px;
+  margin: 0;
+}
+body .tile-md:hover {
+  border: 4px solid #337ab7;
+}
+body .tile-md span.fa-second {
+  position: absolute;
+  top: -8px;
+  left: 40px;
+  width: 20px;
+}
+body .tile-md span.fa-second i {
+  font-size: 1.5em;
+}
+body .tile-lg {
+  width: 310px;
+  height: 310px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #eeeeee;
+  float: left;
+  border: 4px solid transparent;
+  cursor: pointer;
+  color: #337ab7;
+  position: relative;
+  font-weight: 600;
+}
+body .tile-lg span {
+  display: block;
+  height: 50%;
+  line-height: 110px;
+  text-align: center;
+}
+body .tile-lg p {
+  position: absolute;
+  bottom: 10px;
+  margin: 0;
+}
+body .tile-lg:hover {
+  border: 4px solid #337ab7;
+}
+body .tile-lg span.fa-second {
+  position: absolute;
+  top: -8px;
+  left: 40px;
+  width: 20px;
+}
+body .tile-lg span.fa-second i {
+  font-size: 1.5em;
+}
+body .fixed-left {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
+body #statusBar {
+  display: none;
+  padding: 10px;
+  position: absolute;
+  right: 70px;
+  top: 0px;
+  z-index: 9999;
+}
+body #home {
+  margin-top: 10px;
+}
+body .btn-clear {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+body .btn-clear:focus,
+body .btn-clear:hover,
+body .btn-clear:active {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+body #filter-sc-1 {
+  float: right;
+}
+body #vypozicka {
+  margin: 0;
+}
+body #vypozicka form {
+  padding: 0 10px 10px 10px;
+  margin-top: 10px;
+  position: relative;
+}
+body #vypozicka form .form-group {
+  margin-bottom: 5px;
+}
+body #vypozicka hr {
+  margin: 5px 0;
+}
+body #vypozicka h5 {
+  padding-left: 15px;
+}
+body #vypozicka h5 i {
+  margin-right: 10px;
+}
+body .stav {
+  display: none;
+}
+body .navbar-fixed-top ul.nav {
+  margin-left: 10px;
+  width: 98%;
+  margin-right: 20px;
+}
+body .navbar-fixed-top ul.nav li span {
+  padding-top: 10px;
+  display: block;
+  font-size: 1.3em;
+}
+body .navbar-fixed-top ul.nav li button {
+  margin-top: 6px;
+  margin-right: 6px;
+}
+body .ordered {
+  padding: 0;
+  list-style-type: none;
+}
+body .ordered li {
+  padding: 5px 15px 5px 15px;
+  border-bottom: 1px solid #ddd;
+}
+body .ordered li .vypozicka-id {
+  font-weight: 600;
+}
+body #tovar {
+  margin: 0;
+}
+body #tovar i {
+  margin-right: 6px;
+}
+body #tovar_table td.typ_tovaru {
+  text-transform: lowercase;
+}
+body #order-item-list li button {
+  margin-top: 3px;
+}
+body #order-item-list form {
+  width: 95%;
+  padding: 5px 0;
+  margin: 0;
+}
+body #order-item-list form .input-group {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+}
+body #order-item-list form .input-group input {
+  width: 50px;
+}
+body .dropdown-menu li {
+  margin: 0 !important;
+}
+body .template {
+  display: none;
+}
+body .custom-width-1 {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  body .custom-width-1 {
+    float: left;
+    width: 25%;
+  }
+}
+body .custom-width-1-x {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  body .custom-width-1-x {
+    float: left;
+    width: 41.66666667%;
+  }
+}
+body .custom-width-1-y {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  body .custom-width-1-y {
+    float: left;
+    width: 33.33333333%;
+  }
+}
+body .custom-offset-1 {
+  margin-right: 20px;
+  margin-left: 72%;
+}
+body #datepicker-form {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  top: 2px;
+  left: 30px;
+}
+body #datepicker-form label {
+  margin: 10px;
+}
+body #datepicker-form i {
+  margin: 0px;
+}
+body .header-content {
+  margin-top: 0px;
+  margin-bottom: -5px;
+}
+body #user-exists-btn {
+  position: absolute;
+  height: 94%;
+  width: 29%;
+  right: 16px;
+  top: 1px;
+  border-left: 2px solid #eee;
+  padding-left: 20px;
+  /* &:before {
+			content: "]";
+			position: relative;
+			left: -20px;
+			font-size: 17em;
+			top: -51px;
+			} */
+}
+body #user-exists-btn button {
+  position: absolute;
+  top: 50%;
+  margin-top: -17px;
+}
+body .form-inline-block {
+  display: inline-block;
+}
+body .custom-chevron {
+  display: block;
+  margin-right: 4px;
+  margin-top: -3px;
+}
+body #page2 .s2-list {
+  margin-bottom: 0;
+}
+body #page2 .s2-list li {
+  height: 35px;
+  line-height: 35px;
+  border-bottom: 1px solid #ddd;
+  padding-left: 10px;
+}
+body #page2 .s2-list li:hover {
+  background-color: #f5f5f5;
+}
+body #page2 .top-td {
+  padding: 0 !important;
+}
+body #page2 #vypozicky_table tr td {
+  vertical-align: middle;
+}
+body #page2 .template-1:hover {
+  background-color: #f5f5f5;
+}
+body #context-menu-1 {
+  position: absolute;
+  display: none;
+}
+body #tovar-edit {
+  margin: 10px 0 5px 0;
+}
+body .tab-content {
+  position: relative;
+}
+body #servis-osoba-form,
+body #servis-form {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+body .settings-list {
+  padding: 0;
+}
+body .settings-list li {
+  padding: 0;
+  margin: 0;
+  display: block;
+  height: 34px;
+}
+body .settings-list li .setting-name {
+  margin-top: 5px;
+}
+body .settings-list li.separator {
+  height: 1px;
+  background-color: #eeeeee;
+  margin: 10px 0;
+}
+body div#page12 .fixed-table-container {
+  max-height: 533px;
+  overflow: auto;
+  cursor: pointer;
+}
+body .add-modal-form {
+  display: none;
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1300px !important;
+  }
+}
+.bootstrap-table {
+  margin-bottom: 20px;
+}
+.picked {
+  background-color: #337ab7 !important;
+  color: #FFF;
+}
+.no-h {
+  height: initial !important;
+}
+.item-reserved {
+  background-color: #5bc0de;
+}
+.sports {
+  background-color: #5bc0de;
+}
+.no-m {
+  margin: 0 !important;
+}
+.no-p-b {
+  padding-bottom: 0;
+}
+.separator-ws {
+  margin: 0 10px;
+}
+.m-l-sm {
+  margin-left: 5px;
+}
+.m-r-sm {
+  margin-right: 5px;
+}
+.m-b-sm {
+  margin-bottom: 5px;
+}
+.m-t-sm {
+  margin-top: 5px;
+}
+.m-t-md {
+  margin-top: 12px;
+}
+.m-b-md {
+  margin-bottom: 12px;
+}
+.m-r-md {
+  margin-right: 12px;
+}
+.m-l-md {
+  margin-left: 12px;
+}
+th.next,
+th.prev,
+th.datepicker-switch {
+  cursor: pointer;
+}
+.font-lg {
+  font-size: 1.2em;
+}
+.dummy-list {
+  list-style-type: none;
+}
+.strong {
+  font-weight: bold;
+}
+.btn-td {
+  text-align: right;
+  padding-right: 12px !important;
+}
+.my-editable-1,
+.my-editable-2 {
+  color: #337AB7;
+  border-bottom: 1px dashed #337AB7;
+}
+.disabled-element {
+  pointer-events: none;
+  opacity: 0.3;
+}
+.enable-on-date-picked {
+  pointer-events: none;
+  opacity: 0.3;
+}
+.calendar {
+  overflow: hidden !important;
+}
+.calendar .calendar-header table th {
+  font-size: 16px;
+  padding: 5px;
+}

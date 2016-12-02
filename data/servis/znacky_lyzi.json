@@ -1,0 +1,122 @@
+[
+   {
+		"id":1,
+		"nazov": "Atomic"
+	},
+	{
+		"id":2,
+		"nazov": "Armada"
+	},
+	{
+		"id":3,
+		"nazov": "Blizzard"
+	},
+	{
+		"id":4,
+		"nazov": "Burton"
+	},
+	{
+		"id":5,
+		"nazov": "Core"
+	},
+	{
+		"id":6,
+		"nazov": "Dynastar"
+	},
+	{
+		"id":7,
+		"nazov": "Dynamic"
+	},
+	{
+		"id":8,
+		"nazov": "Dynafit"
+	},
+	{
+		"id":9,
+		"nazov": "Elan"
+	},
+	{
+		"id":10,
+		"nazov": "Fat-Ypus"
+	},
+	{
+		"id":12,
+		"nazov": "Fischer"
+	},
+	{
+		"id":13,
+		"nazov": "G3"
+	},
+	{
+		"id":14,
+		"nazov": "Hagan"
+	},
+	{
+		"id":15,
+		"nazov": "HEAD"
+	},
+	{
+		"id":16,
+		"nazov": "K2"
+	},
+	{
+		"id":17,
+		"nazov": "Kneissl"
+	},
+	{
+		"id":18,
+		"nazov": "Kessler"
+	},
+	{
+		"id":19,
+		"nazov": "Lacroix"
+	},
+	{
+		"id":20,
+		"nazov": "Line"
+	},
+	{
+		"id":21,
+		"nazov": "Majesty"
+	},
+	{
+		"id":22,
+		"nazov": "Nordica"
+	},
+	{
+		"id":23,
+		"nazov": "Rossignol"
+	},
+	{
+		"id":24,
+		"nazov": "Salomon"
+	},
+	{
+		"id":25,
+		"nazov": "Sporten"
+	},
+	{
+		"id":26,
+		"nazov": "Skylotec"
+	},
+	{
+		"id":27,
+		"nazov": "Stockl"
+	},
+	{
+		"id":28,
+		"nazov": "Volant"
+	},
+	{
+		"id":29,
+		"nazov": "Volkl"
+	},
+	{
+		"id":30,
+		"nazov": "Vist"
+	},
+	{
+		"id":31,
+		"nazov": "Wedze"
+	}
+]

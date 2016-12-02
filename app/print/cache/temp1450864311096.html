@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="sk-SK">
+
+  <head>
+    <title>Požičovňa a servis lyží - RaMaR</title>
+
+    <meta charset="UTF-8">
+
+    <style type="text/css">
+	body {
+		padding: 1%;
+	}
+
+	.wrapper {
+		position: relative;
+	}
+
+	.header {
+		padding: 0;
+		margin: 0;
+	}
+
+	.header table {
+		font-size: 0.7em;
+	}
+
+	.header p {
+		margin: 0;
+	}
+
+	.logo {
+		width: 10%;
+		background-color: red;
+		float: left;
+		height: 100%;
+		position: relative;
+	}
+
+	.logo img {
+		position: absolute;
+		width: 100%;
+		top: 50%;
+		margin-top: -15px;
+	}
+
+	.sekcia-1 {
+		width: 40%;
+		background-color: blue;
+		float: left;
+		height: 100%;
+	}
+
+	.sekcia-1-top {
+		font-size: 1.5em;
+		margin: 10px;
+	}
+
+	.sekcia-2 {
+		width: 50%;
+		background-color: green;
+		float: left;
+		height: 100%;
+	}
+
+	.sekcia-1-bottom p {
+		margin-left: 40px;
+	}
+
+	.sekcia-1-bottom p span {
+		margin: -30px;
+	}
+
+	.sekcia-1-bottom p strong {
+		margin: 36px;
+	}
+
+	.tovar {
+		width: 100%;
+		margin-top: -1px;
+	}
+
+	table, th, td {
+	    border: 1px solid black;
+	    border-collapse: collapse;
+	}
+
+	img {
+		width: 100%;
+	}
+
+	.big {
+		font-size: 1.2em;
+	}
+
+	td {
+		padding: 5px;
+	}
+
+	.mr {
+		margin-right: 20px;
+	}
+
+	#meno {
+		font-size: 1.4em;
+	    margin-left: -10px;
+	}
+
+	.datum {
+		margin-bottom: 5px;
+		margin-top: -1px;
+		font-size: 0.8em;
+	}
+
+ 	.tovar {
+	 	margin-bottom: -1px;
+	}
+
+	.datum table th {
+		padding: 5px;
+	}
+
+	.datum td {
+		font-size: 0.8em;
+	}
+
+	.tovar thead td {
+		font-weight: bold;
+		font-size: 0.8em;
+	}
+
+	#datum_od, #datum_do {
+		font-weight: bold;
+	}
+
+	.right {
+		float: right;
+		margin-right: 20px;
+	}
+
+	.podm table, .podm td, .podm th {
+		border:  none;
+	}
+
+	.up {
+		text-transform: uppercase;
+	}
+
+	.podm td {
+		padding-top: 5px;
+	    font-size: 0.6em;
+	}
+
+	.podm {
+	}
+
+	.footer {
+		margin-top: 10px;
+	}
+
+	h2 {
+		font-size: 1.2em;
+		margin: 10px 0 5px 0; 
+	}
+
+	.ehm {
+		margin-top: -1px;
+	}
+
+</style>
+  </head>
+
+  <body>
+
+	<!-- <div class="note-1" style="font-size:0.6em">Zmluva medzi prenajímateľom (A) a nájomcom (B)</div> -->
+	<div class="header">
+		<table style="width:100%">
+		  <tbody><tr>
+		    <td rowspan="3" width="10%">
+		    	<img src="./print/ramar_logo.png">
+		    </td>
+		    <td width="40%"><strong>Doklad č.: <span id="id">9</span></strong></td> 
+		    <td>
+		    	<strong class="mr">Meno Priezvisko:</strong>
+		    	<span id="meno">alojz hlina</span>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td rowspan="2">
+		    	<p>
+		    		<strong>Rastislav Martančík - RAMAR</strong><br>
+					Štefánikova 99<br>
+					921 01 Piešťany<br>
+					IČO: 40751643, IČ DPH: SK1020783654<br>
+					tel.: +421 (0)901 737 370<br>
+				</p>
+			</td> 
+		    <td>
+		    	<strong class="mr">Číslo dokladu:&nbsp;&nbsp;</strong>
+		    	<span id="doklad">54555445454</span>
+		    	<br>
+		    	<strong class="mr">Telefónne číslo:</strong>
+		    	<span id="tel_cislo">8557854</span>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td>
+		    	<strong class="mr">Adresa:</strong><br>
+		    	<span id="adresa"></span>
+		    </td>
+		  </tr>
+		</tbody></table>
+	</div>
+	<!-- <div class="ehm">
+		<table style="width: 100%; font-size:0.8em">
+			<tbody>
+				<tr>
+					<td class="ehm2">Požičané:</td>
+				</tr>
+			</tbody>
+		</table>
+	</div> -->
+	<strong style="font-size:0.8em">Servisovaný tovar:</strong>
+	<div class="tovar" id="tovar-tabulka">
+		<table style="width: 100%; font-size: 0.8em">
+			<thead>
+				<tr>
+					<!-- <td>id. číslo</td> -->
+					<td>značka</td>
+					<td>uhol spodná hrana</td>
+					<td>uhol bočná hrana</td>
+					<td>vykonaná práca</td>
+				</tr>
+			</thead>
+			<tbody style="font-size: 0.9em; padding: 2px 5px"><tr><td class="kategoria">Armada awda</td><td class="spodna-hrana">0,5</td><td class="bocna-hrana">90</td><td class="praca">Veľký servis</td></tr><tr><td class="kategoria">Armada awda</td><td class="spodna-hrana">0,5</td><td class="bocna-hrana">90</td><td class="praca">Voskovanie</td></tr><tr><td class="kategoria">Armada awda</td><td class="spodna-hrana">0,5</td><td class="bocna-hrana">90</td><td class="praca">Závodný servis</td></tr><tr><td class="kategoria">Majesty locco</td><td class="spodna-hrana">1,25</td><td class="bocna-hrana">88</td><td class="praca">Demontáž</td></tr><tr><td class="kategoria">Majesty locco</td><td class="spodna-hrana">1,25</td><td class="bocna-hrana">88</td><td class="praca">Stredný servis</td></tr></tbody>
+		</table>
+	</div>
+	<div class="datum">
+		<table style="width: 100%; border-top-width: 0px;">
+			<tbody><tr>
+		    	<td style="width: 10%">Prijaté dňa: </td>
+		    	<td id="datum_prijatia" style="width: 10%">23.12.2015</td>
+		    	<td rowspan="2">
+		    		<span>Poznámka: </span>
+		    		<span class="right">
+			    		<span id="zlava" class="big"></span>
+						<span class="big">‎</span>
+					</span>
+				</td>
+				<td rowspan="2">
+		    		<span>K úhrade:</span>
+		    		<span class="right">
+			    		<span id="cena_spolu" class="big">20</span>
+						<span class="big">‎€</span>
+					</span>
+				</td>
+		  	</tr>
+		  	<tr>
+		    	<td style="width: 10%">K vyzdvihnutiu: </td>
+		    	<td id="datum_odovzdania" style="width: 10%">30.12.2015</td>
+		  	</tr>
+		</tbody></table>
+	</div>
+	<div class="podm">
+		<table style="width: 100%; padding-top: 30px; padding-bottom: 30px;">
+			<tbody><tr>
+				<td style="width: 100%; font-size: 2em;text-align:center" valign="middle">
+					SKI-SERVIS - POŽIČOVŇA - PREDAJ
+				</td>
+			</tr>
+		</tbody></table>
+	</div>
+	<div class="footer">
+		<div class="podm">
+		<table style="width: 100%">
+			<tbody><tr>
+				<td style="width: 30%" class="up"></td>
+				<td style="width: 32%; border-bottom:1px dotted #000">Dátum prevzatia:<span id="datum_prevzatia_footer">30.12.2015</span></td>
+				<td style="width: 6%"></td>
+				<td style="width: 32%; border-bottom:1px dotted #000">Prevzal:</td>
+			</tr>
+		</tbody></table>
+	</div>
+	</div>
+<!-- footer -->
+  </body>
+
+</html>
+<!-- footer  end -->

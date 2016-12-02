@@ -1,0 +1,38 @@
+[
+   {
+      "id":1,
+      "nazov": "Veľký servis"
+   },
+   {
+      "id":2,
+      "nazov": "Stredný servis"
+   },
+   {
+      "id":3,
+      "nazov": "Malý servis"
+   },
+   {
+      "id":4,
+      "nazov": "Hrany"
+   },
+   {
+      "id":5,
+      "nazov": "Voskovanie"
+   },
+   {
+      "id":6,
+      "nazov": "Závodný servis"
+   },
+   {
+      "id":7,
+      "nazov": "Montáž viazania"
+   },
+   {
+      "id":8,
+      "nazov": "Demontáž"
+   },
+   {
+      "id":9,
+      "nazov": "Nastavenie viazania"
+   }
+]

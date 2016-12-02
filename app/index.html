@@ -1,0 +1,1268 @@
+﻿<!DOCTYPE html>
+<html lang="sk-SK">
+
+  <head>
+    <title>Požičovňa a servis lyží - RaMaR</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/bootstrap-table.css">
+    <link rel="stylesheet" href="css/bootstrap-editable.css">
+    <link rel="stylesheet" href="css/datepicker.css">
+    <link rel="stylesheet" href="css/fileinput.min.css">
+    <link rel="stylesheet" href="css/bootstrap-toggle.min.css">
+    <link rel="stylesheet" href="css/clndr.css">
+    <link rel="stylesheet" href="css/bootstrap-select.min.css">
+		<link rel="stylesheet" href="css/bootstrap-year-calendar.min.css">
+		<link rel="stylesheet" href="css/tooltip.css">
+		<!--<link rel="stylesheet" href="css/jCal.css">-->
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <meta charset="UTF-8"> 
+
+  </head>
+
+  <body>
+  	<!-- <div class="se-pre-con"></div> -->
+    <div class="content container">
+
+      <!-- common parts of application -->
+      <!-- NAVIGATION -->
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <ul class="nav navbar-nav">
+          <li>
+            <button id="back-btn" type="button" class="btn btn-primary btn-sm pull-left m-r-sm" onclick="goBack();">
+              <i class="fa fa-arrow-left fa-lg"></i>
+            </button>
+            <button id="home-btn" type="button" class="btn btn-primary btn-sm pull-left" onclick="goHome();">
+              <i class="fa fa-home fa-lg"></i>
+            </button>
+          </li>
+          <li>
+            <span class="page-heading">Nadpis</span>
+          </li>
+          <li class="pull-right">
+            <button id="refreshBtn" type="button" class="btn btn-primary btn-sm" onclick="refreshPage();">
+              <i class="fa fa-refresh fa-lg"></i>
+            </button>
+          </li>
+          <!-- <li class="pull-right">
+            <button id="settingsBtn" type="button" class="btn btn-primary btn-sm" onclick="refreshPage();">
+              <i class="fa fa-refresh fa-lg"></i>
+            </button>
+            <button id="settingsBtn" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            	<i class="fa fa-cogs fa-lg"></i>
+          		  	</button>
+          			<ul class="dropdown-menu">
+          				<li><a href="#">Vymazať všetky dáta</a></li>
+          			</ul>
+          </li> -->
+        </ul>
+      </nav>
+      <!-- STATUS BAR -->
+	<div id="statusBar" class="alert float-right" role="alert">
+	</div>
+
+      <!-- individual parts (= pages) of application -->
+
+      <!-- HOME PAGE -->
+      <div id="home" class="page">
+        <div class="row">
+          <div class="tile-md" onclick="renderPage('#page1')">
+            <span><i class="fa fa-plus fa-3x"></i></span>
+            <p>Nová výpožička</p>
+          </div>
+          <div class="tile-md" onclick="renderPage('#page2')">
+            <span><i class="fa fa-hourglass-half fa-3x"></i></span>
+            <p>Prebiehajúce výpožičky</p>
+          </div>
+          <div class="tile-md" onclick="renderPage('#page12')">
+            <span><i class="fa fa-calendar fa-3x"></i></span>
+            <p>Kalendár výpožičiek</p>
+          </div>
+          <div class="tile-md" onclick="renderPage('#page3')">
+            <span><i class="fa fa-database fa-3x"></i></span>
+            <p>Databáza</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="tile-md" onclick="renderPage('#page4')">
+            <span><i class="fa fa-wrench fa-3x"></i></span>
+            <span class="fa-second"><i class="fa fa-plus fa-3x"></i></span>
+            <p>Nový servis</p>
+          </div>
+          <div class="tile-md" onclick="renderPage('#page13')">
+            <span><i class="fa fa-wrench fa-3x"></i></span>
+            <p>Prebiehajúci<br> servis</p>
+          </div>
+          <div class="tile-md" onclick="renderPage('#page6')">
+            <span><i class="fa fa-wrench fa-3x"></i></span>
+            <span class="fa-second"><i class="fa fa-hourglass-end fa-3x"></i></span>
+            <p>Ukončený servis</p>
+          </div>
+          <div class="tile-md" onclick="renderPage('#page5')">
+            <span><i class="fa fa-money fa-3x"></i></span>
+            <p>Predaj</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+    	  <div class="tile-md" onclick="renderPage('#page11')">
+            <span><i class="fa fa-cogs fa-3x"></i></span>
+            <p>Nastavenia</p>
+          </div>
+          <div class="tile-md" onclick="renderPage('#page10')">
+            <span><i class="fa fa-upload fa-3x"></i></span>
+            <p>Import dát</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 1  - NOVA VYPOZICKA -->
+
+      <div id="page1" class="page row">
+
+				<!-- vypozicny formular -->
+
+        <div class="col-sm-6">
+          <div class="panel panel-default" id="vypozicka">
+            <div class="panel-heading">
+              <h3 class="panel-title"><strong>Výpožička</strong></h3>
+            </div>
+
+            <!-- datepicker -->
+            <h5 class="header-content datepicker-element">
+              <strong>Dátum:</strong>
+              <form class="form-inline form-inline-block" id="datepicker-form">
+                <div class="form-group input-group col-sm-4">
+                    <input class="datepicker form-control no-m" id="datum-od" placeholder="Od">
+                    <span class="input-group-addon">
+                      <i class="fa fa-calendar no-m"></i>
+                    </span>
+                </div>
+                <span class="separator-ws">
+                  <i class="fa fa-arrows-h no-m"></i>
+                </span>
+                <div class="form-group input-group col-sm-4">
+                    <input class="datepicker form-control no-m" id="datum-do" placeholder="Do">
+                    <span class="input-group-addon">
+                      <i class="fa fa-calendar no-m"></i>
+                    </span>
+                </div>
+              </form>
+            </h5>
+            <hr>
+
+            <!-- pozicane polozky -->
+						<div class="enable-on-date-picked switchable">
+							<h5>
+								<strong>Položky:</strong>
+								<span class="badge" id="badge-sc-1">0</span>
+								<a class="btn btn-primary btn-xs pull-right custom-chevron" data-toggle="collapse" href="#order-item-list" aria-expanded="false" aria-controls="order-item-list">
+									<i class="fa fa-chevron-down no-m"></i>
+								</a>
+							</h5>
+							<hr>
+							<ul class="ordered collapse" id="order-item-list">
+								<li class="template">
+									<form class="form-inline form-inline-block">
+										<span class="vypozicka-id">#123</span>: <span class="vypozicka-typ_tovaru">lyže </span><span class="vypozicka-znacka">Atomic</span><span class="vypozicka-typ">Race 5</span>, veľ. <span class="vypozicka-velkost">120</span>
+										<div class="input-group input-group-sm">
+											<input class="form-control no-m price-partial" placeholder="cena ">
+											<span class="input-group-addon">
+												<i class="fa fa-euro"></i>
+											</span>
+										</div>
+									</form>
+									<button type="button" class="btn btn-danger btn-xs pull-right" onclick="orderRemoveItem($(this))">
+										<i class="fa fa-remove"></i>
+									</button>
+								</li>
+							</ul>
+						</div>
+
+            <!-- udaje o osobe -->
+            <h5 class="enable-on-date-picked switchable">
+              <strong>Osoba:</strong>
+              <a class="btn btn-primary btn-xs pull-right custom-chevron" data-toggle="collapse" href="#vypozicka-osoba-form" aria-expanded="false" aria-controls="vypozicka-osoba-form">
+                <i class="fa fa-chevron-down no-m"></i>
+              </a>
+            </h5>
+            <form id="vypozicka-osoba-form" class="collapse form-horizontal enable-on-date-picked switchable">
+              <div class="form-group">
+                <label class="custom-width-1 control-label" for="vypozicka-meno">Meno</label>
+                <div class="custom-width-1-x">
+                  <input type="text" class="form-control" id="vypozicka-meno" placeholder="Meno">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="custom-width-1 control-label" for="vypozicka-priezvisko">Priezvisko</label>
+                <div class="custom-width-1-x">
+                  <input type="text" class="form-control" id="vypozicka-priezvisko" placeholder="Priezvisko">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="custom-width-1 control-label" for="vypozicka-telefon">Tel. číslo</label>
+                <div class="custom-width-1-x">
+                  <input type="tel" class="form-control" id="vypozicka-telefon" placeholder="Telefónne číslo">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="custom-width-1 control-label" for="vypozicka-cop">Č. dokladu</label>
+                <div class="custom-width-1-x">
+                  <input type="text" class="form-control" id="vypozicka-cop" placeholder="Číslo dokladu (napr. OP)">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="custom-width-1 control-label" for="vypozicka-ulica">Ulica, č. d.</label>
+                <div class="custom-width-1-x">
+                  <input type="text" class="form-control" id="vypozicka-ulica" placeholder="Ulica, číslo domu">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="custom-width-1 control-label" for="vypozicka-psc">PSČ</label>
+                <div class="custom-width-1-x">
+                  <input type="text" class="form-control" id="vypozicka-psc" placeholder="PSČ">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="custom-width-1 control-label" for="vypozicka-mesto">Mesto</label>
+                <div class="custom-width-1-x">
+                  <input type="text" class="form-control" id="vypozicka-mesto" placeholder="Mesto">
+                </div>
+              </div>
+            </form>
+            <hr>
+
+            <!-- cena -->
+            <h5 class="header-content enable-on-date-picked switchable">
+              <strong>Cena:</strong>
+              <form class="form-inline form-inline-block" id="price-form">
+                <div class="form-group input-group col-sm-8">
+                    <input id="price-total" class="form-control no-m text-right" placeholder="Cena celkom">
+                    <span class="input-group-addon">
+                      <i class="fa fa-euro no-m"></i>
+                    </span>
+                </div>
+              </form>
+            </h5>
+            <hr>
+
+            <!-- tlacidla na ulozenie -->
+            <form class="form-horizontal enable-on-date-picked switchable">
+              <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                  <button id="rent-btn" type="button" class="btn btn-primary btn-md text-uppercase">
+                    Požičať
+                  </button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+				<!-- tovar table -->
+
+        <div class="col-sm-6 enable-on-date-picked switchable">
+          <div class="panel panel-default" id="tovar">
+            <div class="panel-heading">
+              <h3 class="panel-title"><strong>Tovar</strong></h3>
+              <input type="text" class="search form-control" placeholder="Hľadaj..." />
+              <!--<form class="form-inline" id="filter-sc-1">
+                <div class="form-group">
+            	  <i class="fa fa-filter"></i>
+                  <select class="form-control" id="s1_select">
+                  	<option>všetko</option>
+                    <option>lyže</option>
+                    <option>lyžiarky</option>
+                    <option>prilba</option>
+                    <option>palice</option>
+                  </select>
+                </div>
+              </form>-->
+            </div>
+
+            <div class="table-overflow">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th><button type="submit" class="sort btn-clear" data-sort="id">
+                        # <i class="fa fa-sort"></i>
+                      </button></th>
+                    <th>
+                      <button type="submit" class="sort btn-clear" data-sort="znacka">
+                        Značka <i class="fa fa-sort"></i>
+                      </button>
+                    </th>
+                    <th>
+                      <button type="submit" class="sort btn-clear" data-sort="typ">
+                        Typ <i class="fa fa-sort"></i>
+                      </button></th>
+                    <th>
+                      <button type="submit" class="sort btn-clear" data-sort="velkost">
+                        Veľkosť <i class="fa fa-sort"></i>
+                      </button></th>
+                    <th>
+                      <button type="submit" class="sort btn-clear" data-sort="typ_tovaru">
+                        Typ tovaru <i class="fa fa-sort"></i>
+                      </button></th>
+                  </tr>
+                </thead>
+                <tbody id="tovar_table" class="list disabled">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SCREEN 2 - PREBIEHAJUCE VYPOZICKY -->
+
+      <div id="page2" class="page">
+				<div class="row">
+					<div class="col-sm-2">
+						<input type="text" id="s2SearchInput" class="m-b-md search form-control" placeholder="Hľadaj..." />
+					</div>
+				</div>
+
+	  		<div id="s2-vypozicky-div">
+	      	<table class="table">
+	                <thead>
+	                  <tr>
+	                  	<th>
+	                  		<button type="button" class="btn btn-default btn-sm" onclick="$('#page2 .collapse').collapse('toggle')">
+	                        	<i class="fa fa-angle-double-down fa-lg"></i>
+	                      	</button>
+	                  	</th>
+	                    <th>
+	                    	<button type="submit" class="btn-clear" data-sort="id" onclick="s2_renderAfterSort('id', 'number');">
+	                        Č. výp. <i class="fa fa-sort"></i>
+	                      </button>
+	                  	</th>
+	                    <th>
+	                      <button type="submit" class="btn-clear" onclick="s2_renderAfterSort('meno', 'string');">
+	                        Meno <i class="fa fa-sort"></i>
+	                      </button>
+	                    </th>
+	                    <th>
+	                      <button type="submit" class="btn-clear" onclick="s2_renderAfterSort('priezvisko', 'string');">
+	                        Priezvisko <i class="fa fa-sort"></i>
+	                      </button>
+	                    </th>
+	                    <th>
+	                      <button type="submit" class="btn-clear" onclick="s2_renderAfterSort('adresa', 'string');">
+	                        Adresa <i class="fa fa-sort"></i>
+	                      </button>
+	                    </th>
+	                    <th>
+	                      <button type="submit" class="btn-clear" onclick="">
+	                        Tel. č. 
+	                        <!-- <i class="fa fa-sort"></i> -->
+	                      </button>
+	                    </th>
+	                    <th>
+	                      <button type="submit" class="btn-clear" onclick="s2_renderAfterSort('datum_od', 'date');">
+	                       Od <i class="fa fa-sort"></i>
+	                      </button>
+	                    </th>
+	                    <th>
+	                      <button type="submit" class="btn-clear" onclick="s2_renderAfterSort('datum_do', 'date');">
+	                        Do <i class="fa fa-sort"></i>
+	                      </button>
+	                    </th>
+	                    <th>
+	                      <button type="submit" class="btn-clear" onclick="s2_renderAfterSort('dni', 'number');">
+	                        Dni do vrátenia <i class="fa fa-sort"></i>
+	                      </button>
+	                    </th>
+	                    <th></th>
+	                    <!-- <th>print</th> -->
+	                    <!-- <th>edit</th> -->
+	                    <!-- <th>mark as complete</th> -->
+	                  </tr>
+	                </thead>
+	                <tbody id="vypozicky_table" class="list">
+		                	<tr class="template template-1">
+		                		<td>
+		                			<a class="btn btn-primary btn-xs expand-btn" role="button" data-toggle="collapse" href="#s2-detail0" aria-expanded="true" aria-controls="s2-detail0">
+										<i class="fa fa-chevron-down no-m"></i>
+									</a>
+		                		</td>
+		                		<td class="">
+		                			<span class="label label-success label-md font-lg id"></span>
+		                		</td>
+		                		<td class="meno"></td>
+		                		<td class="priezvisko"></td>
+		                		<td class="adresa"></td>
+		                		<td class="tel_cislo"></td>
+		                		<td><span class="datum_od my-editable-2"></span></td>
+		                		<td><span class="datum_do my-editable-2"></span></td>
+		                		<td class="dni"></td>
+		                		<td class="btn-td">
+		                			<button type="button" class="btn btn-default btn-sm print-btn m-r-sm" onclick="s2_add(this)" title="Pridať položku">
+										<i class="fa fa-plus"></i>
+									</button>
+		                			<button type="button" class="btn btn-default btn-sm print-btn m-r-sm" onclick="s2_print(this);" title="Vytlačiť doklad">
+										<i class="fa fa-print"></i>
+									</button>
+		                			<button type="button" class="btn btn-default btn-sm edit-btn m-r-sm" onclick="s2_edit(this)" title="Editovať">
+										<i class="fa fa-pencil"></i>
+									</button>
+		                			<button type="button" class="btn btn-default btn-sm check-btn" onclick="s2_markComplete(this)" title="Výpožička vrátená">
+										<i class="fa fa-check"></i>
+									</button>
+								</td>
+		                	</tr>
+		                	<tr class="template template-2">
+		                		<td colspan="10" class="top-td">
+			                		<ul class="list-unstyled s2-list collapse" id="s2-detail0">
+			                			<li class="template">
+			                				<span class="m-r-md">č. <span class="my-editable-1 strong id" data-type="text" data-url=""></span>:</span>
+					                		<span class="popis"></span>
+					                		<span>
+					                			<button type="button" class="btn btn-primary btn-xs pull-right m-r-md m-t-sm" onclick="s2_markItemComplete(this)">
+													<i class="fa fa-check"></i>
+												</button>
+											</span>
+					                		<span>
+												<button type="button" class="btn btn-danger btn-xs pull-right m-r-md m-t-sm" onclick="s2_removeItem(this)">
+													<i class="fa fa-remove"></i>
+												</button>
+											</span>
+			                			</li>
+			                		</ul>
+			                	</td>
+		                	</tr>
+	                </tbody>
+	        </table>
+      </div>
+    </div>
+
+
+      <!-- SCREEN 3 - DATABAZA -->
+
+      <div id="page3" class="page">
+        <div>
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#tovar-tab" aria-controls="tovar-tab" role="tab" data-toggle="tab"><strong>Tovar</strong></a></li>
+            <li role="presentation"><a href="#zakaznici-tab" aria-controls="zakaznici-tab" role="tab" data-toggle="tab"><strong>Zákazníci</strong></a></li>
+            <li role="presentation"><a href="#vypozicky-tab" aria-controls="vypozicky-tab" role="tab" data-toggle="tab"><strong>Výpožičky</strong></a></li>
+            <li class="pull-right">
+            	<button type="button" class="btn btn-primary" id="saveChangesBtn">
+                	<i class="fa fa-floppy-o"></i>
+                	Uložiť zmeny
+          		</button>
+            </li>
+            <li class="pull-right m-r-sm">
+            	<button type="button" class="btn btn-primary" id="addNewBtn">
+                	<i class="fa fa-plus"></i>
+                	Nový záznam
+          		</button>
+            </li>
+          </ul>
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="tovar-tab">
+              <div class="table-overflow">
+                <table id="s3-tovar-table" class="table-striped"
+					data-toggle="table"
+					data-toolbar="#toolbar"
+					data-search="true"
+					data-id-field="id"
+					data-url="../data/tovar.json"
+					data-sort-name="id"
+					data-sort-order="asc"
+					data-search-align="left">
+                </table>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="zakaznici-tab">
+            	<div class="table-overflow">
+                <table id="s3-zakaznici-table" class="table-striped"
+					data-toggle="table"
+					data-toolbar="#toolbar"
+					data-search="true"
+					data-id-field="id"
+					data-url="../data/osoby.json"
+					data-sort-name="id"
+					data-sort-order="asc"
+					data-search-align="left">
+                </table>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="vypozicky-tab">
+            	<div class="table-overflow">
+                <table id="s3-vypozicky-table" class="table-striped"
+					data-toggle="table"
+					data-toolbar="#toolbar"
+					data-search="true"
+					data-id-field="id"
+					data-url="../data/vypozicky.json"
+					data-sort-name="id"
+					data-sort-order="asc"
+					data-search-align="left">
+                </table>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tovar_vypozicky-tab">
+            	<div class="table-overflow">
+                <table id="s3-tovar_vypozicky-table" class="table-striped"
+					data-toggle="table"
+					data-toolbar="#toolbar"
+					data-search="true"
+					data-id-field="id"
+					data-url="../data/tovar_vypozicky.json"
+					data-sort-name="id"
+					data-sort-order="asc"
+					data-search-align="left">
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+	  <!-- PAGE 4 - SERVIS -->
+      <div id="page4" class="page">
+      	<div class="row">
+
+		    <div class="col-sm-4">
+		        <div class="panel panel-default" id="servis-panel">
+		            <div class="panel-heading">
+		              <h3 class="panel-title"><strong>Servis</strong></h3>
+		            </div>
+		            <h5 class="m-t-md m-l-md">
+              			<strong>Zákazník:</strong>
+              		</h5>
+		            <form id="servis-osoba-form" class="form-horizontal m-t-md">
+		              <div class="form-group">
+		                <label class="control-label col-sm-4" for="servis-meno">Meno</label>
+		                <div class="col-sm-8">
+		                  <input type="text" class="form-control" id="servis-meno" placeholder="Meno">
+		                </div>
+		              </div>
+		              <div class="form-group">
+		                <label class="control-label col-sm-4" for="servis-priezvisko">Priezvisko</label>
+		                <div class="col-sm-8">
+		                  <input type="text" class="form-control" id="servis-priezvisko" placeholder="Priezvisko">
+		                </div>
+		              </div>
+		              <div class="form-group">
+		                <label class="control-label col-sm-4" for="servis-telefon">Tel. číslo</label>
+		                <div class="col-sm-8">
+		                  <input type="tel" class="form-control" id="servis-telefon" placeholder="Telefónne číslo">
+		                </div>
+		              </div>
+		              <div class="form-group">
+		                <label class="control-label col-sm-4" for="servis-poznamka">Poznámka</label>
+		                <div class="col-sm-8">
+		                  <input type="text" class="form-control" id="servis-poznamka" placeholder="Poznámka">
+		                </div>
+		              </div>
+		              <!-- <div class="form-group">
+		                <label class="control-label col-sm-4" for="servis-ulica">Ulica, č. d.</label>
+		                <div class="col-sm-8">
+		                  <input type="text" class="form-control" id="servis-ulica" placeholder="Ulica, číslo domu">
+		                </div>
+		              </div>
+		              <div class="form-group">
+		                <label class="control-label col-sm-4" for="servis-psc">PSČ</label>
+		                <div class="col-sm-8">
+		                  <input type="text" class="form-control" id="servis-psc" placeholder="PSČ">
+		                </div>
+		              </div>
+		              <div class="form-group">
+		                <label class="control-label col-sm-4" for="servis-mesto">Mesto</label>
+		                <div class="col-sm-8">
+		                  <input type="text" class="form-control" id="servis-mesto" placeholder="Mesto">
+		                </div>
+		              </div> -->
+						<!-- <div class="form-group">
+							<label class="control-label col-sm-4" for="servis-adresa">Adresa</label>
+							<div class="col-sm-8">
+								<textarea class="form-control" rows="3" id="servis-adresa"></textarea>
+							</div>
+						</div> -->
+		          </form>
+		          <hr>
+	              <h5 class="m-t-md m-l-md">
+          			<strong>Servis:</strong>
+          		  </h5>
+		          <form id="servis-form" class="form-horizontal">
+		              <div class="form-group">
+		              	<label class="control-label col-sm-4" for="servis-datum">Dátum prevzatia</label>
+		              	<div class="col-sm-8">
+		                    <input class="datepicker form-control" id="servis-datum" placeholder="Dátum prevzatia">
+		                </div>
+                	  </div>
+                	  <div class="form-group">
+		              	<label class="control-label col-sm-4" for="servis-datum-2">Dátum odovzdania</label>
+		              	<div class="col-sm-8">
+		                    <input class="datepicker form-control" id="servis-datum-2" placeholder="Dátum odovzdania">
+		                </div>
+                	  </div>
+  		              <div class="form-group">
+		              	<label class="control-label col-sm-4" for="servis-cena">Cena</label>
+		              	<div class="col-sm-8">
+		                    <input class="form-control" id="servis-cena" placeholder="Cena">
+		                </div>
+                	  </div>
+                	  <div class="form-group">
+	                	  <div class="col-sm-offset-4 col-sm-8">
+			                  <button id="servis-btn" type="button" class="btn btn-primary btn-md text-uppercase" onclick="saveServis()">
+			                    TLAČIŤ A ULOŽIŤ
+			                  </button>
+			              </div>
+			          </div>
+
+		          </form>
+		        </div>
+		    </div>
+
+			<div class="col-sm-8">
+		    	<div class="panel panel-default" id="servis-panel">
+		            <div class="panel-heading">
+		              <h3 class="panel-title"><strong>Servisovaný tovar</strong></h3>
+		            </div>
+		            <div class="panel-body no-p-b">
+		            	<div class="row">
+					    	<div class="col-sm-2">
+					    		<strong>Značka</strong>
+					    	</div>
+					    	<div class="col-sm-2">
+					    		<strong>Typ</strong>
+					    	</div>
+					    	<div class="col-sm-2">
+					    		<strong>Spodná hrana</strong>
+					    	</div>
+					    	<div class="col-sm-2">
+					    		<strong>Bočná hrana</strong>
+					    	</div>
+					    	<div class="col-sm-3">
+					    		<strong>Vykonaná práca</strong>
+					    	</div>
+					    	<div class="col-sm-1">
+					    		<!-- <strong></strong> -->
+					    	</div>
+					    </div>
+					    <!-- <br> -->
+					    <div class="row m-t-sm">
+					    	<form id="servis-add-form">
+						    	<div class="col-sm-2">
+						    		<input id="autofill-1" type="text" class="form-control znacka" placeholder="Značka lyží">
+						    	</div>
+						    	<div class="col-sm-2">
+									<input type="text" class="form-control typ" id="servis-input-1">
+						    	</div>
+						    	<div class="col-sm-2">
+									<select id="servis-select-2" class="form-control col-sm-8 spodna-hrana">
+									</select>
+						    	</div>
+						    	<div class="col-sm-2">
+									<select id="servis-select-3" class="form-control col-sm-8 bocna-hrana">
+									</select>
+						    	</div>
+						    	<div class="col-sm-3">
+									<select id="servis-select-4" class="form-control col-sm-8 vykonana-praca">
+									</select>
+						    	</div>
+						    	<div class="col-sm-1">
+						    		<button type="button" class="btn btn-primary" onclick="servisAddItem()">
+						    			<i class="fa fa-icon fa-plus fa-lg"></i>
+						    		</button>
+						    	</div>
+						    </form>
+					    </div>
+					    <hr>
+					    <div class="row">
+					    	<table class="table table-striped table-hover no-h">
+				                <tbody id="servis_table" class="no-blue-hover">
+			                		  <tr class="template">
+									    <td class="znacka">Jill</td>
+									    <td class="typ">Smith</td>		
+									    <td class="spodna-hrana">50</td>
+									    <td class="bocna-hrana">loremp</td>
+									    <td class="vykonana-praca">loremp</td>
+									    <td>
+									    	<button type="button" class="btn btn-danger btn-xs pull-right m-r-md" onclick="servisRemoveItem(this)">
+							                  <i class="fa fa-remove"></i>
+							                </button>
+									    </td>
+									  </tr>
+				                </tbody>
+              				</table>
+					    </div>
+				    </div>
+			    </div>
+		    </div>
+
+		</div>
+      </div>
+
+	  <!-- SCREEN 5 - Predaj -->
+      <div id="page5" class="page">
+      	<div class="m-t-md font-lg">
+    		<span>Nákup spolu:</span>
+        	<strong>
+        		<span id="predaj-nakup-spolu">0</span>
+        	</strong>
+        	<i class="fa fa-euro"></i>
+        </div>
+        <div class="m-t-md font-lg">
+    		<span>Predaj spolu:</span>
+        	<strong>
+        		<span id="predaj-predaj-spolu">0</span>
+        	</strong>
+        	<i class="fa fa-euro"></i>
+        </div>
+        <div class="m-t-md font-lg">
+    		<span>Zisk spolu:</span>
+        	<strong>
+        		<span id="predaj-zisk-spolu">0</span>
+        	</strong>
+        	<i class="fa fa-euro"></i>
+        </div>
+        <hr>
+      	<form class="form-inline m-t-md">
+		  <div class="form-group">
+		    <label class="sr-only" for="predaj-nazov">Názov tovaru</label>
+		    <input type="text" class="form-control" id="predaj-nazov" placeholder="Názov tovaru">
+		  </div>
+		  <div class="form-group">
+		    <select class="form-control" id="predaj-typ-tovaru">
+				<option>lyže</option>
+				<option>lyžiarky</option>
+				<option>prilba</option>
+				<option>palice</option>
+			</select>
+		  </div>
+		  <div class="form-group">
+		    <label class="sr-only" for="predaj-nakup">Nákup</label>
+		    <input type="text" class="form-control" id="predaj-nakup" placeholder="Nákup">
+		  </div>
+		  <div class="form-group">
+		    <label class="sr-only" for="predaj-predaj">Predaj</label>
+		    <input type="text" class="form-control" id="predaj-predaj" placeholder="Predaj">
+		  </div>
+		  <div class="checkbox m-r-sm m-l-sm">
+		    <label>
+		      <input type="checkbox" id="predaj-sklad"> Na sklade
+		    </label>
+		  </div>
+		  <!-- <div class="form-group">
+		    <label class="sr-only" for="predaj-zisk">Zisk</label>
+		    <input type="text" class="form-control disabled" id="predaj-zisk" placeholder="Zisk" disabled>
+		  </div> -->
+		  <button type="button" class="btn btn-primary" onclick="predajAddItem()">
+		  	<i class="fa fa-plus fa-md"></i>
+		  </button>
+		  <div class="form-group pull-right">
+				<button type="button" class="btn btn-primary" onclick="ulozPredaj()">
+					<i class="fa fa-floppy-o"></i>
+					Uložiť zmeny
+				</button>
+		  </div>
+		</form>
+        <table id="predaj-table"
+        	data-toggle="table"
+			data-toolbar="#toolbar"
+			data-search="false"
+			data-url="../data/predaj.json"
+			data-sort-order="asc"
+			data-search-align="left"
+			data-unique-id="id">
+        </table>
+      </div>
+
+      <div id="page6" class="page">
+        <div class="m-t-md font-lg">
+    		<span>Ukončený servis spolu:</span>
+        	<strong>
+        		<span id="servis-spolu">0</span>
+        	</strong>
+        	<i class="fa fa-euro"></i>
+        </div>
+        <div class="m-t-md font-lg">
+    		<span>Prebiehajúci servis spolu:</span>
+        	<strong>
+        		<span id="servis-preb-spolu">0</span>
+        	</strong>
+        	<i class="fa fa-euro"></i>
+        </div>
+        <table id="s6-servis-table" class="table-striped"
+			data-toggle="table"
+			data-toolbar="#toolbar"
+			data-search="true"
+			data-id-field="id"
+			data-url="../data/servis/servis_archive.json"
+			data-sort-name="datum_odovzdania"
+			data-sort-order="asc"
+			data-search-align="left">
+        </table>
+      </div>
+
+      <div id="page7" class="page">
+        <div class="jumbotron">
+          <h1>Vyhľadávanie</h1>
+          <p>V súčasnosti sa pracuje na iných častiach systému.</p>
+        </div>
+      </div>
+
+      <!-- SCREEN 8 -->
+      <div id="page8" class="page">
+      	<!-- <div class="alert alert-success" role="alert">
+	      <strong>Výpožička bola úspešne uložená!</strong>
+	    </div> -->
+      </div>
+
+      <!-- SCREEN 10 -->
+      <div id="page10" class="page">
+      	<form>
+      		<!-- <h1>Import dát</h1> -->
+      		<ol class="col-sm-4">
+      			<li>
+					<!-- <div class="form-group">
+						<label for="csvInputFile">Vyberte .csv súbor:</label>
+						<input type="file" id="csvInputFile">
+						<p class="help-block">Vyberte súbor, ktorý chcete importovať do databázy.</p>
+					</div> -->
+					<div class="form-group">
+					    <label class="control-label">Vyberte súbor:</label>
+    					<input id="input-1" type="file">
+					</div>
+				</li>
+				<li>
+					<div class="form-group">
+						<strong>Vyberte, do ktorej databázovej tabuľky chcete dáta importovať:</strong>
+						<div class="radio">
+						  <label>
+						    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+						    Tovar
+						  </label>
+						</div>
+						<div class="radio">
+						  <label>
+						    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+						    Zákazníci
+						  </label>
+						</div>
+						<div class="radio">
+						  <label>
+						    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+						    Výpožičky
+						  </label>
+						</div>
+						<div class="radio">
+						  <label>
+						    <input type="radio" name="optionsRadios" id="optionsRadios4" value="option4">
+						    Tovar+Výpožička
+						  </label>
+						</div>
+					</div>
+				</li>
+				<li>
+					<strong>Potvrďte zvolené parametre a vykonajte import:</strong>
+					<br>
+					<button type="button" class="btn btn-primary m-t-sm" id="importBtn">
+						<i class="fa fa-upload"></i>
+						Importovať
+					</button>
+				</li>
+			</ol>
+      	</form>
+      </div>
+
+	  <!-- SCREEN 11 -->
+      <div id="page11" class="page">
+          <!-- <span>Switch</span> -->
+          <!-- <input checked data-toggle="toggle" type="checkbox"> -->
+          <ul class="settings-list">
+          	<li>
+          		<div class="setting-name col-sm-3">
+          			<span>Vymaže <strong>všetky údaje</strong> z databázy</span>
+          		</div>
+          		<div class="setting-action col-sm-9">
+          			<button type="button" class="btn btn-danger" onclick="deleteUniverse();">
+          				<i class="fa fa-trash fa-md m-r-sm"></i>Vymazať
+          			</button>
+          		</div>
+          	</li>
+          	<li class="separator"></li>
+          	<li>
+          		<div class="col-sm-3"><strong>Debug</strong> režim</div>
+          		<div class="col-sm-9">
+          			<input id="debugBtn" data-toggle="toggle" type="checkbox">
+          		</div>
+          	</li>
+          	<li class="separator"></li>
+          	<li>
+          		<div class="setting-name col-sm-3">Vyčistiť <strong>neaktívne prepojenia</strong> v databáze</div>
+          		<div class="setting-action col-sm-9">
+          			<button type="button" class="btn btn-primary" onclick="cleanDatabase()">
+          				<i class="fa fa-eraser fa-md m-r-sm"></i>Vyčistiť
+          			</button>
+          		</div>
+          	</li>
+          	<li class="separator"></li>
+          	<li>
+          		<div class="setting-name col-sm-3">Vymaže súbor s údajmi o <strong>predaji</strong></div>
+          		<div class="setting-action col-sm-9">
+          			<button type="button" class="btn btn-danger" onclick="eraseFile('data/predaj.json');">
+          				<i class="fa fa-trash fa-md m-r-sm"></i>Vymazať
+          			</button>
+          		</div>
+          	</li>
+          	<li class="separator"></li>
+          	<li>
+          		<div class="setting-name col-sm-3">Znovu vygenerovať doklady pre všetky aktívne objednávky</div>
+          		<div class="setting-action col-sm-9">
+          			<button type="button" class="btn btn-primary" onclick="regeneratePdfOrderNames();">
+          				<i class="fa fa-refresh fa-md m-r-sm"></i>Generovať
+          			</button>
+          		</div>
+          	</li>
+          	<li class="separator"></li>
+          	<li>
+          		<div class="setting-name col-sm-3">Vymaže tabuľku Servis</div>
+          		<div class="setting-action col-sm-9">
+          			<button type="button" class="btn btn-danger" onclick="_dropServis();">
+          				<i class="fa fa-trash fa-md m-r-sm"></i>Vymazať
+          			</button>
+          		</div>
+          	</li>
+          </ul>
+      </div>
+
+      <!-- SCREEN 12 - KALENDAR -->
+      <div id="page12" class="page">
+      	<div class="container">
+      		<div class="row">
+      			<div class="col-sm-4">
+		      		<div class="table-overflow">
+		                <table id="s12-tovar-table" class="table-striped"
+							data-toggle="table"
+							data-toolbar="#toolbar"
+							data-search="true"
+							data-id-field="id"
+							data-url="../data/tovar.json"
+							data-sort-name="id"
+							data-sort-order="asc"
+							data-search-align="left">
+		                </table>
+	              	</div>
+						</div>
+	            <div class="col-sm-8 cal-y">
+      					<!--<div id="s12-calendar" class="cal1"></div>-->
+								<div class="calendar"></div>
+      				</div>
+      		</div>
+      	</div>
+      </div>
+
+      <!-- SCREEN 13 -->
+      <div id="page13" class="page">
+      	<table id="s13-servis-table" class="table-striped"
+			data-toggle="table"
+			data-toolbar="#toolbar"
+			data-search="true"
+			data-id-field="id"
+			data-url="../data/servis/servis.json"
+			data-sort-name="datum_odovzdania"
+			data-sort-order="asc"
+			data-search-align="left">
+        </table>
+      </div>
+
+      <!-- MODALS -->
+
+      <!-- nacitat udaje o existujucom zakaznikovi (#1)-->
+      <div class="modal fade" id="modal-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Načítať údaje o existujúcom zákazníkovi</h4>
+            </div>
+            <div class="modal-body">
+              <p>Tu bude tabuľka zákazníkov s vyhľadávaním a z nej sa vyberie jeden zákazník, ktorého údaje sa prenesú do výpožičkového formulára.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Zavrieť</button>
+              <button type="button" class="btn btn-primary">OK</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+	  <!-- MODAL potvrdit zmeny v databaze -->
+      <div class="modal fade" id="modal-confirm-changes">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Potvrdenie zmien v databáze</h4>
+            </div>
+            <div class="modal-body">
+              <p>Vykonali ste <strong>zmeny</strong> v databáze. Prajete si ich <strong>uložiť</strong>?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" onclick="dismissChangesToDB();">Zrušiť zmeny</button>
+              <button type="button" class="btn btn-primary" onclick="wrapper_saveChanges();">Uložiť zmeny</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      <div class="modal fade" id="notfilledModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Chyba</h4>
+            </div>
+            <div class="modal-body bg-danger">
+              <p>Vyplňte vo fomulári aspoň: <strong>meno</strong> alebo <strong>priezvisko</strong>, <strong>telefónne číslo</strong>, <strong>číslo dokladu</strong>.</p>
+              <p>Problém môže byť aj v nasledovnom: výpožička neobsahuje žiadne <strong>položky</strong>, nie je zadaná <strong>celková cena výpožičky</strong> alebo sú chybne zadané <strong>dátumy</strong> výpožičky.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Zavrieť</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="confirmOrder">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Potvrdenie</h4>
+            </div>
+            <div class="modal-body bg-warning">
+              <p>Naozaj chcete <strong>vytvoriť výpožičku</strong> s uvedenými údajmi?</p>
+              <p>Prípadné <strong>chybne uvedené informácie</strong> je možné opraviť v sekcii <strong>Domov > Databáza > Výpožičky</strong></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Zavrieť</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="orderConfirmedAction()">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="wrongDates">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Chyba</h4>
+            </div>
+            <div class="modal-body bg-danger">
+              <p>
+              	<strong>Dátum konca</strong> výpožičky je <strong>skôr</strong> ako <strong>dátum začiatku</strong>!
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Zavrieť</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- New item MODAL -->
+      <div class="modal fade" id="newItemModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Nový záznam</h4>
+            </div>
+            <div class="modal-body">
+				<form class="form-horizontal add-modal-form" id="addTovarForm">
+					<div class="form-group">
+						<label for="new-id" class="col-sm-2 control-label">ID tovaru</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="new-id" placeholder="ID tovaru">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="znacka" class="col-sm-2 control-label">Značka</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="znacka" placeholder="Značka tovaru (napr. Atomic)">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="model_tovaru" class="col-sm-2 control-label">Model tovaru</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="model_tovaru" placeholder="Model tovaru (napr. Race 5)">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="velkost_tovaru" class="col-sm-2 control-label">Veľkosť</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="velkost_tovaru" placeholder="Veľkosť tovaru (napr. M)">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="druh_tovaru" class="col-sm-2 control-label">Druh tovaru</label>
+						<div class="col-sm-10">
+							<!-- <input type="text" class="form-control" id="druh_tovaru" placeholder="Druh tovaru (napr. prilba)"> -->
+							<select class="form-control" id="druh_tovaru">
+								<option>lyže</option>
+								<option>lyžiarky</option>
+								<option>prilba</option>
+								<option>palice</option>
+							</select>
+						</div>
+					</div>
+				</form>
+				<form class="form-horizontal add-modal-form" id="addOsobyForm">
+					<div class="form-group">
+						<label for="id-osoba" class="col-sm-2 control-label">ID osoby</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="id-osoba" placeholder="ID osoby">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="meno" class="col-sm-2 control-label">Meno</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="meno" placeholder="Meno">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="priezvisko" class="col-sm-2 control-label">Priezvisko</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="priezvisko" placeholder="Priezvisko">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="tel_cislo" class="col-sm-2 control-label">Telefónne číslo</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="tel_cislo" placeholder="Telefónne číslo">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="doklad" class="col-sm-2 control-label">Doklad</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="doklad" placeholder="Číslo dokladu">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="ulica" class="col-sm-2 control-label">Ulica</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="ulica" placeholder="Ulica, číslo domu">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="psc" class="col-sm-2 control-label">PSČ</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="psc" placeholder="PSČ">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="mesto" class="col-sm-2 control-label">Mesto</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="mesto" placeholder="Mesto">
+						</div>
+					</div>
+				</form>
+				<form class="form-horizontal add-modal-form" id="addVypozickyForm">
+					<div class="form-group">
+						<label for="mod_dod" class="col-sm-2 control-label">Dátum od</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="mod_dod" placeholder="Dátum od">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="mod_ddo" class="col-sm-2 control-label">Dátum do</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="mod_ddo" placeholder="Dátum do">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="cena_mod" class="col-sm-2 control-label">Cena</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="cena_mod" placeholder="Cena">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="mod_ido" class="col-sm-2 control-label">ID osoby</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="mod_ido" placeholder="ID osoby">
+						</div>
+					</div>
+				</form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Zavrieť</button>
+              <button type="button" class="btn btn-primary" onclick="addNewItem();"><i class="fa fa-plus m-r-sm"></i>Pridať</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ New item MODAL -->
+
+    </div>
+
+  	<!-- <footer>
+  		<p>&copy; Company 2015</p>
+  	</footer> -->
+
+    <!-- CONTEXT MENUS -->
+
+    <!-- kontextove menu (#2) -->
+    <div id="context-menu-1" class="dropdown clearfix">
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+        <li><a tabindex="-1" href="#"><i class="fa fa-check"></i> Výpožička / rezervácia ukončená</a></li>
+        <li class="divider"></li>
+        <li><a tabindex="-1" href="#"><i class="fa fa-print"></i> Vytlačiť doklad</a></li>
+        <li class="divider"></li>
+        <li><a tabindex="-1" href="#"><i class="fa fa-refresh"></i> Rezervácia <i class="fa fa-angle-right"></i> Výpožička</a></li>
+      </ul>
+    </div>
+
+    <script>
+      window.shared = {};
+      window.shared.tovar = [];
+      window.shared.vypozicky = [];
+      window.shared.zakaznici = [];
+			window.shared.tooltips;
+    </script>
+
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list.min.js"></script>
+    <script src="js/list.pagination.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/bootstrap-table.js"></script>
+    <script src="js/bootstrap-table-editable.js"></script>
+    <script src="js/bootstrap-editable.js"></script>
+		<script src="js/bootstrap-table-sk-SK.js"></script>
+		<script src="js/bootbox.min.js"></script>
+		<script src="js/plugins/canvas-to-blob.min.js"></script>
+    <script src="js/fileinput.js"></script>
+    <script src="js/bootstrap-toggle.min.js"></script>
+		<script src="js/bootstrap-year-calendar.min.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/clndr.min.js"></script>
+    <script src="js/moment-range.js"></script>
+    <script src="js/bootstrap3-typeahead.min.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+		<script src="js/tooltip.min.js"></script>
+		<!--<script src="js/jCal.js"></script>-->
+
+    <script src="js/backend.js"></script>
+    <script src="js/frontend.js"></script>
+    <script src="js/main.js"></script>
+
+  </body>
+
+</html>
